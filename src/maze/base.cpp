@@ -1,7 +1,6 @@
-//#include <jess/except.hpp>
 #include <iostream>
 
-#include <galaxy/maze/base.hpp>
+#include <maze/base.hpp>
 
 jess::maze::base::base( jess::maze::description desc ):
 	desc_(desc)
@@ -17,8 +16,7 @@ std::set<int>	sets_containing( std::set<int> ind, sets_type sets )
 {
 	std::set<int> set_i;
 
-	for( auto it = ind.begin(); it != ind.end(); it++ )
-	{
+	for(auto it = ind.begin(); it != ind.end(); it++ ) {
 		for( unsigned int a = 0; a < sets.size(); a++ )
 		{
 			if( sets.at(a).find(*it) != sets.at(a).end() )

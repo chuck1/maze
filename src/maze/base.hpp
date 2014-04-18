@@ -4,7 +4,7 @@
 #include <vector>
 #include <set>
 
-#include <galaxy/maze/description.hpp>
+#include <maze/description.hpp>
 
 namespace jess
 {
