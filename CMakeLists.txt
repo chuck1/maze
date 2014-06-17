@@ -1,9 +1,14 @@
 cmake_minimum_required (VERSION 2.6)
 
-project(maze)
+INCLUDE($ENV{HOME}/.config.cmake)
 
-# common methods for static library
-# =================================
-include(../cmake/static_library.cmake)
+PROJECT(maze)
 
+FIND_PACKAGE(CMakeHelper)
+
+cmh_static_library()
+
+SET(libs ${PROJECT_NAME})
+
+ADD_SUBDIRECTORY(test)
 

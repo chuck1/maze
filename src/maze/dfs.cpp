@@ -1,50 +1,55 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include <galaxy/maze/dfs.hpp>
+#include <maze/dfs.hpp>
 
 #define PRINTVAR(x) std::cout<<#x<<"="<<(x)<<std::endl
 
-jess::maze::dfs::dfs( jess::maze::description desc ):
-	jess::maze::base( desc )
+jess::maze::dfs2::dfs2(jess::maze::description2 desc):
+	jess::maze::base2(desc),
+	i_(0,0)
 {
 
 }
 
-void	jess::maze::dfs::run()
+void	jess::maze::dfs2::run()
 {
 	if ( !desc_.check() )
 	{
 		return;
 	}
 
-	ispath = std::vector<bool>( desc_.N_, 0 );
-	dead = std::vector<bool>( desc_.N_, 0 );
-	unvisited = std::vector<bool>( desc_.N_, 1 );
+	int N = desc_.size_.x * desc_.size_.y;
 
-	PRINTVAR( ispath.size() );
-	PRINTVAR( dead.size() );
-	PRINTVAR( unvisited.size() );
+	ispath = new bool[N];
+	dead = new bool[N];
+	unvisited = new bool[N];
+	
+	for(int i = 0; i < N; i++) {
+		ispath[i] = false;
+		dead[i] = false;
+		unvisited[i] = true;
+	}
 
-	i_ = 0;
+	PRINTVAR( N );
 
-	while( 1 )
-	{
-		std::cout << "i_=" << i_ << std::endl;
+	while( 1 ) {
+		std::cout << "i_=" << i_.x << " " << i_.y << std::endl;
 
-		ispath.at(i_) = true;
-		unvisited.at(i_) = false;
+		get_ispath(i_) = true;
+		get_unvisited(i_) = false;
 		
+		print_maze(ispath);
+		print_maze(unvisited);
+	
+		std::cin.get();
+			
 		visit_cells_with_high_wall_adjacency();
 		
-		if( randomly_select_unvisited_neighbor() )
-		{
+		if(randomly_select_unvisited_neighbor()) {
 			continue;
-		}
-		else
-		{
-			if( backtrack() )
-			{
+		} else {
+			if(backtrack()) {
 				continue;
 			}
 			else
@@ -53,56 +58,62 @@ void	jess::maze::dfs::run()
 			}
 		}
 	}
-	print_maze( ispath );
+	print_maze(ispath);
+	print_maze(unvisited);
+
 }	
-void	jess::maze::dfs::visit_cells_with_high_wall_adjacency()
+void	jess::maze::dfs2::visit_cells_with_high_wall_adjacency()
 {
-	std::vector<int> adj;
+	std::cout << "visit cells with high adjacency" << std::endl;
+
 	int count;
 
-	for( int i = 0; i < desc_.N_; i++ )
-	{
-		if( unvisited.at(i) )
-		{
-			adj = desc_.adjacent_to( i );
-			count = 0;
-			for( auto it = adj.begin(); it != adj.end(); it++ )
-			{
-				if( ispath.at( *it ) )
-				{
-					count++;
+	for( int i = 0; i < desc_.size_.x; i++ ) {
+		for( int j = 0; j < desc_.size_.y; j++ ) {
+			ivec2 v(i,j);
+
+			if( get_unvisited(v) ) {
+				
+				auto adj = desc_.adjacent_to(v);
+				PRINTVAR( adj.size() );
+
+				count = 0;
+				for(auto a : adj) {
+					std::cout << "a = " << a.x << " " << a.y << std::endl;
+					if(get_ispath(a)) {
+						count++;
+					}
 				}
-			}
 
-			if( count > 1 )
-			{
-				unvisited.at(i) = false;
-			}
+				if(count > 1) {
+					std::cout << "visiting" << std::endl;
+					get_unvisited(v) = false;
+				}
 
-			// aditional checks
+				// aditional checks
+			}
 		}
 	}
 }
-bool	jess::maze::dfs::randomly_select_unvisited_neighbor()
-{
-	//std::cout << "randomly_select" << std::endl;
+bool	jess::maze::dfs2::randomly_select_unvisited_neighbor() {
+	std::cout << "randomly_select" << std::endl;
+	
+	auto adj = desc_.adjacent_to(i_);
+	
+	PRINTVAR( adj.size() );
+	
+	
+	std::cout << "\tfilter out visited" << std::endl;
 
-	std::vector<int> adj = desc_.adjacent_to( i_ );
-
-	//PRINTVAR( adj.size() );
-
-
-	// filter out visited
 	auto it = adj.begin();
 	while( it != adj.end() )
 	{
 		//PRINTVAR( *it );
-		
-		if( !unvisited.at( *it ) )
-		{
+
+		if(!get_unvisited( *it )) {
 			//std::cout << "erase" << std::endl;
-			
-			adj.erase( it );
+
+			it = adj.erase( it );
 		}
 		else
 		{
@@ -110,46 +121,49 @@ bool	jess::maze::dfs::randomly_select_unvisited_neighbor()
 		}
 	}
 
+	PRINTVAR( adj.size() );
+
 	if( adj.empty() )
 	{
 		//std::cout << "randomly_select exit" << std::endl;
 		return false;
 	}
 
-	//PRINTVAR( adj.size() );
+	PRINTVAR( adj.size() );
 
 	int a = rand() % adj.size();
 
 	//PRINTVAR( a );
-	
+
 	it = adj.begin();
 	std::advance( it, a );
 
 	i_ = *it;
-	//std::cout << "randomly_select exit" << std::endl;
+
+	std::cout << "randomly_select exit" << std::endl;
 	return true;
 }
-bool	jess::maze::dfs::backtrack()
+bool	jess::maze::dfs2::backtrack()
 {
 	std::cout << "backtrace" << std::endl;
-	
+
 	bool progress = false;
 
-	std::vector<int> adj;
 
 	while( 1 )
 	{
 
-		dead.at( i_ ) = true;
+		get_dead( i_ ) = true;
 
 		progress = false;
 
-		adj = desc_.adjacent_to( i_ );
+		auto adj = desc_.adjacent_to( i_ );
+		PRINTVAR( adj.size() );
 
-		for( auto it = adj.begin(); it != adj.end(); it++ )
-		{
-			if( ispath.at( *it ) && !dead.at( *it ) )
-			{
+		for( auto it = adj.begin(); it != adj.end(); it++ ) {
+
+			if(get_ispath(*it) && (!get_dead(*it))) {
+
 				progress = true;
 
 				i_ = *it;
@@ -163,8 +177,8 @@ bool	jess::maze::dfs::backtrack()
 			}
 		}
 
-		if( !progress )
-		{
+		if(!progress) {
+			std::cout << "no progress" << std::endl;
 			return false;
 		}
 	}
@@ -172,9 +186,15 @@ bool	jess::maze::dfs::backtrack()
 
 
 }
-
-
-
+bool&		jess::maze::dfs2::get_ispath(ivec2 const & i) {
+	return ispath[i.x * desc_.size_.x + i.y];
+}
+bool&		jess::maze::dfs2::get_dead(ivec2 const & i) {
+	return dead[i.x * desc_.size_.x + i.y];
+}
+bool&		jess::maze::dfs2::get_unvisited(ivec2 const & i) {
+	return unvisited[i.x * desc_.size_.x + i.y];
+}
 
 
 
