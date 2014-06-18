@@ -10,7 +10,7 @@ jess::maze::base2::base2( jess::maze::description2 desc ):
 
 
 
-std::set<size_t>		sets_containing(std::set<ivec2> ind, sets_type sets) {
+std::set<size_t>		sets_containing(set_type ind, sets_type sets) {
 	std::cout << "sets_containing" << std::endl;
 	std::cout << "ind.size() = " << ind.size() << std::endl;
 	std::set<size_t> set_i;
@@ -88,7 +88,7 @@ void		join_sets(set_type adj, sets_type & sets ) {
 	std::cout << "join sets exit" << std::endl;
 }
 
-std::set<ivec2>		jess::maze::base2::adjacent_wall_to(ivec2 a) {
+set_type		jess::maze::base2::adjacent_wall_to(ivec2 a) {
 	// get all adjacent cells
 	auto ret = desc_.adjacent_to(a);
 

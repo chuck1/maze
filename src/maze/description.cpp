@@ -10,11 +10,11 @@ bool	jess::maze::description2::check()
 {
 	return 1;
 }
-std::set<ivec2>		jess::maze::description2::adjacent_to(ivec2 i) {
+set_type		jess::maze::description2::adjacent_to(ivec2 i) {
 	
 	//std::cout << "adjacent_to" << std::endl;
 	
-	std::set<ivec2> ret;
+	set_type ret;
 	
 	if(i.x < (size_.x - 1)) ret.insert(i + ivec2( 1, 0));
 	if(i.x > 0)		ret.insert(i + ivec2(-1, 0));

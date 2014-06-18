@@ -39,10 +39,10 @@ void	jess::maze::dfs2::run()
 		get_ispath(i_) = true;
 		get_unvisited(i_) = false;
 		
-		print_maze(ispath);
-		print_maze(unvisited);
+		//print_maze(ispath);
+		//print_maze(unvisited);
 	
-		std::cin.get();
+		//std::cin.get();
 			
 		visit_cells_with_high_wall_adjacency();
 		

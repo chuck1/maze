@@ -4,21 +4,19 @@
 #include <vector>
 #include <set>
 
-#include <glm/glm.hpp>
-
-typedef glm::ivec2 ivec2;
+#include <maze/typedef.hpp>
 
 /*struct ivec2 {
-	ivec2(int nx, int ny): x(nx), y(ny) {}
-	ivec2		operator+(ivec2 const & rhs) const {
-		return ivec2(x + rhs.x, y + rhs.y);
-	}
-	bool		operator<(ivec2 const & rhs) const {
-		if(x == rhs.x) return (y < rhs.y);
-		return (x < rhs.x);
-	}
-	int x,y;
-};*/
+  ivec2(int nx, int ny): x(nx), y(ny) {}
+  ivec2		operator+(ivec2 const & rhs) const {
+  return ivec2(x + rhs.x, y + rhs.y);
+  }
+  bool		operator<(ivec2 const & rhs) const {
+  if(x == rhs.x) return (y < rhs.y);
+  return (x < rhs.x);
+  }
+  int x,y;
+  };*/
 
 namespace jess
 {
@@ -32,7 +30,7 @@ namespace jess
 			ivec2			size_;
 
 			bool			check();
-			std::set<ivec2>		adjacent_to(ivec2 i);
+			set_type		adjacent_to(ivec2 i);
 		};
 	}
 }

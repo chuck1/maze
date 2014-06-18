@@ -28,8 +28,8 @@ void jess::maze::rk2::run()
 	wall_ = new bool[N];
 	
 
-	std::set<ivec2> unvisited;
-	sets_type sets( N, std::set<ivec2>() );
+	set_type unvisited;
+	sets_type sets( N, set_type() );
 
 	for( int i = 0; i < desc_.size_.x; i++ ) {
 		for( int j = 0; j < desc_.size_.y; j++ ) {

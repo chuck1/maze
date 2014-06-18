@@ -6,21 +6,18 @@
 
 #include <maze/description.hpp>
 
-typedef std::set<ivec2>				set_type;
-typedef std::pair< bool, set_type >		ret_pair;
-typedef std::vector< set_type >			sets_type;
 
 /*
  * return indices of sets in \c sets containing cells at \c ind
  */
 std::set<std::size_t>		sets_containing(
-		std::set<ivec2> ind,
+		set_type ind,
 		sets_type sets );
 bool				are_of_different_sets(
-		std::set<ivec2> adj,
+		set_type adj,
 		sets_type sets);
 void				join_sets(
-		std::set<ivec2> adj,
+		set_type adj,
 		sets_type& sets);
 
 namespace jess {
@@ -34,7 +31,7 @@ namespace jess {
 				 *
 				 * return set of indices of walls adjacent to cell at index @c a
 				 */
-				std::set<ivec2>		adjacent_wall_to(ivec2);
+				set_type		adjacent_wall_to(ivec2);
 
 				bool&			get(ivec2 const & i);
 
