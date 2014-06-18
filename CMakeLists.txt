@@ -4,6 +4,8 @@ INCLUDE($ENV{HOME}/.config.cmake)
 
 PROJECT(maze)
 
+INCLUDE_DIRECTORIES(../glm)
+
 FIND_PACKAGE(CMakeHelper)
 
 cmh_static_library()
