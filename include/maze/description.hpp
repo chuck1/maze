@@ -4,7 +4,11 @@
 #include <vector>
 #include <set>
 
-struct ivec2 {
+#include <glm/glm.hpp>
+
+typedef glm::ivec2 ivec2;
+
+/*struct ivec2 {
 	ivec2(int nx, int ny): x(nx), y(ny) {}
 	ivec2		operator+(ivec2 const & rhs) const {
 		return ivec2(x + rhs.x, y + rhs.y);
@@ -14,7 +18,7 @@ struct ivec2 {
 		return (x < rhs.x);
 	}
 	int x,y;
-};
+};*/
 
 namespace jess
 {
