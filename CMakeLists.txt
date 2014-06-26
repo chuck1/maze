@@ -8,7 +8,7 @@ INCLUDE_DIRECTORIES(../glm)
 
 FIND_PACKAGE(CMakeHelper)
 
-cmh_static_library()
+cmh_shared_library()
 
 SET(libs ${PROJECT_NAME})
 
