@@ -65,7 +65,7 @@ void	jess::maze::dfs2::run()
 }	
 void	jess::maze::dfs2::visit_cells_with_high_wall_adjacency()
 {
-	std::cout << "visit cells with high adjacency" << std::endl;
+	//std::cout << "visit cells with high adjacency" << std::endl;
 
 	int count;
 
@@ -80,14 +80,14 @@ void	jess::maze::dfs2::visit_cells_with_high_wall_adjacency()
 
 				count = 0;
 				for(auto a : adj) {
-					std::cout << "a = " << a.x << " " << a.y << std::endl;
+					//std::cout << "a = " << a.x << " " << a.y << std::endl;
 					if(get_ispath(a)) {
 						count++;
 					}
 				}
 
 				if(count > 1) {
-					std::cout << "visiting" << std::endl;
+					//std::cout << "visiting" << std::endl;
 					get_unvisited(v) = false;
 				}
 

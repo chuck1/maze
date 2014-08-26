@@ -48,32 +48,32 @@ void jess::maze::rk2::run()
 	while(!unvisited.empty()) {
 		
 		i = rand() % unvisited.size();
-		std::cout << "i=" << i << " unvisited.size()=" << unvisited.size() << std::endl;
+		//std::cout << "i=" << i << " unvisited.size()=" << unvisited.size() << std::endl;
 
 		auto it = unvisited.begin();
 		std::advance(it,i);
 
 		auto a = *it;
 
-		std::cout << "cell " << a.x << " " << a.y << std::endl;
+		//std::cout << "cell " << a.x << " " << a.y << std::endl;
 
 		unvisited.erase(it);
 
 		auto adj = adjacent_wall_to( a );
 
-		std::cout << "adj.size() = " << adj.size() << std::endl;
+		//std::cout << "adj.size() = " << adj.size() << std::endl;
 
 		if( are_of_different_sets(adj, sets) ) {
 			
-			std::cout << "\tremoving wall" << std::endl;
+			//std::cout << "\tremoving wall" << std::endl;
 
 			get(a) = 0;
 
 			join_sets( adj, sets );
 
-			std::cout << "sets.size()=" << sets.size() << std::endl;
+			//std::cout << "sets.size()=" << sets.size() << std::endl;
 		} else {
-			std::cout << "\twall not removed" << std::endl;
+			//std::cout << "\twall not removed" << std::endl;
 		}
 
 		//print_wall();
