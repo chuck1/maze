@@ -3,7 +3,8 @@
 
 #include <maze/dfs.hpp>
 
-#define PRINTVAR(x) std::cout<<#x<<"="<<(x)<<std::endl
+//#define PRINTVAR(x) std::cout<<#x<<"="<<(x)<<std::endl
+#define PRINTVAR(x)
 
 jess::maze::dfs2::dfs2(jess::maze::description2 desc):
 	jess::maze::base2(desc),
@@ -34,7 +35,7 @@ void	jess::maze::dfs2::run()
 	PRINTVAR( N );
 
 	while( 1 ) {
-		std::cout << "i_=" << i_.x << " " << i_.y << std::endl;
+		//std::cout << "i_=" << i_.x << " " << i_.y << std::endl;
 
 		get_ispath(i_) = true;
 		get_unvisited(i_) = false;
@@ -96,14 +97,14 @@ void	jess::maze::dfs2::visit_cells_with_high_wall_adjacency()
 	}
 }
 bool	jess::maze::dfs2::randomly_select_unvisited_neighbor() {
-	std::cout << "randomly_select" << std::endl;
+	//std::cout << "randomly_select" << std::endl;
 	
 	auto adj = desc_.adjacent_to(i_);
 	
 	PRINTVAR( adj.size() );
 	
 	
-	std::cout << "\tfilter out visited" << std::endl;
+	//std::cout << "\tfilter out visited" << std::endl;
 
 	auto it = adj.begin();
 	while( it != adj.end() )
