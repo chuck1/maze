@@ -141,12 +141,12 @@ bool	jess::maze::dfs2::randomly_select_unvisited_neighbor() {
 
 	i_ = *it;
 
-	std::cout << "randomly_select exit" << std::endl;
+	//std::cout << "randomly_select exit" << std::endl;
 	return true;
 }
 bool	jess::maze::dfs2::backtrack()
 {
-	std::cout << "backtrace" << std::endl;
+	//std::cout << "backtrace" << std::endl;
 
 	bool progress = false;
 
@@ -179,7 +179,7 @@ bool	jess::maze::dfs2::backtrack()
 		}
 
 		if(!progress) {
-			std::cout << "no progress" << std::endl;
+			//std::cout << "no progress" << std::endl;
 			return false;
 		}
 	}
