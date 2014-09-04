@@ -3,20 +3,38 @@
 
 #include <glm/glm.hpp>
 
-typedef glm::ivec2 ivec2;
+namespace maze {
+	template<int N> struct traits {};
+	template<> struct traits<2> {
+		typedef glm::ivec2	ivec;
+		typedef glm::vec2	vec;
+	};
+	template<> struct traits<3> {
+		typedef glm::ivec3	ivec;
+		typedef glm::vec3	vec;
+	};
+}
 
-struct lessv {
-	bool operator() (const ivec2& x, const ivec2& y) const {
-		if(x.x == y.x) return x.y < y.y;
-		return x.x < y.x;
+template<int D> struct lessv {
+
+	typedef typename maze::traits<D>::ivec	ivec;
+	typedef typename maze::traits<D>::vec		vec;
+
+
+	bool operator() (const ivec& x, const ivec& y) const {
+		for(int i = 0; i < D; i++) {
+			if(x[i] != y[i]) return x[i] < y[i];
+		}
+		return false;
 	}
-	typedef ivec2 first_argument_type;
-	typedef ivec2 second_argument_type;
+
+	typedef ivec first_argument_type;
+	typedef ivec second_argument_type;
 	typedef bool result_type;
 };
 
-typedef std::set<ivec2,lessv>				set_type;
-typedef std::pair< bool, set_type >			ret_pair;
-typedef std::vector< set_type >				sets_type;
+template<int D> using set_type =  std::set< typename maze::traits<D>::ivec, lessv<D> >;
+template<int D> using ret_pair =  std::pair< bool, set_type<D> >;
+template<int D> using sets_type = std::vector< set_type<D> >;
 
 #endif
