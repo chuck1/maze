@@ -3,9 +3,9 @@
 
 int main() {
 
-	jess::maze::description2 d(ivec2(10,10));
+	maze::description<2> d(glm::ivec2(10,10));
 
-	jess::maze::dfs2 m(d);
+	maze::dfs<2> m(d);
 
 	m.run();
 

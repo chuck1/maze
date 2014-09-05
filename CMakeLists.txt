@@ -12,5 +12,5 @@ INCLUDE_DIRECTORIES(../glm)
 
 INCLUDE(cmh_library)
 
-#ADD_SUBDIRECTORY(test)
+ADD_SUBDIRECTORY(test)
 

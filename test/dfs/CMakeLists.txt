@@ -1,4 +1,15 @@
-PROJECT(test-dfs)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
 
-link_exe()
+INCLUDE($ENV{HOME}/.config.cmake)
+
+FIND_PACKAGE(CMakeHelper)
+
+PROJECT(test_maze_dfs)
+INCLUDE(../../../../config.cmake)
+INCLUDE(cmh_build_config)
+
+ADD_DEFINITIONS("-DGLM_FORCE_RADIANS")
+
+INCLUDE(cmh_executable)
+
 
