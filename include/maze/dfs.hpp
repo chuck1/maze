@@ -65,8 +65,8 @@ namespace maze {
 						}
 					}
 				}
-				base<D>::print_maze(ispath);
-				base<D>::print_maze(unvisited);
+				//base<D>::print_maze(ispath);
+				//base<D>::print_maze(unvisited);
 
 			}	
 			void	visit_cells_with_high_wall_adjacency()

@@ -16,8 +16,8 @@ namespace maze
 
 			void run()
 			{
-				std::cout << "running..." << std::endl;
-				std::cout << "size = " << base<D>::desc_.size_.x << " " << base<D>::desc_.size_.y << std::endl;
+				//std::cout << "running..." << std::endl;
+				//std::cout << "size = " << base<D>::desc_.size_.x << " " << base<D>::desc_.size_.y << std::endl;
 
 				int N = prod<D>(base<D>::desc_.size_);
 
@@ -36,7 +36,7 @@ namespace maze
 						sets.at(i).insert(v);
 				}
 
-				print_maze(base<D>::wall_);
+				//print_maze(base<D>::wall_);
 
 				int i = 0;
 				while(!unvisited.empty()) {
@@ -73,7 +73,7 @@ namespace maze
 					//print_wall();
 				}
 
-				print_maze( base<D>::wall_ );
+				//print_maze( base<D>::wall_ );
 			}
 
 	};
