@@ -11,7 +11,10 @@
  * return indices of sets in \c sets containing cells at \c ind
  */
 
-template<int D> std::set<size_t>		sets_containing(set_type<D> ind, sets_type<D> sets) {
+template<int D>
+std::set<size_t>		sets_containing(
+		maze::set_type<D> ind, maze::sets_type<D> sets)
+{
 	//std::cout << "sets_containing" << std::endl;
 	//std::cout << "ind.size() = " << ind.size() << std::endl;
 	std::set<size_t> set_i;
@@ -28,7 +31,11 @@ template<int D> std::set<size_t>		sets_containing(set_type<D> ind, sets_type<D> 
 	return set_i;
 
 }
-template<int D> bool				are_of_different_sets(set_type<D> adj, sets_type<D> sets) {
+template<int D>
+bool				are_of_different_sets(
+		maze::set_type<D> adj,
+		maze::sets_type<D> sets)
+{
 
 	// returns false if all cells in adj are of the same set, otherwise true.
 
@@ -52,7 +59,7 @@ template<int D> bool				are_of_different_sets(set_type<D> adj, sets_type<D> sets
 	return false;
 }
 
-template<int D> void				join_sets(set_type<D> adj, sets_type<D> & sets) {
+template<int D> void				join_sets(maze::set_type<D> adj, maze::sets_type<D> & sets) {
 
 	auto set_i = sets_containing( adj, sets );
 

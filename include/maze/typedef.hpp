@@ -13,7 +13,6 @@ namespace maze {
 		typedef glm::ivec3	ivec;
 		typedef glm::vec3	vec;
 	};
-}
 
 template<int D> struct lessv {
 
@@ -36,5 +35,7 @@ template<int D> struct lessv {
 template<int D> using set_type =  std::set< typename maze::traits<D>::ivec, lessv<D> >;
 template<int D> using ret_pair =  std::pair< bool, set_type<D> >;
 template<int D> using sets_type = std::vector< set_type<D> >;
+
+}
 
 #endif
